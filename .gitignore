@@ -1,0 +1,9 @@
+*~
+*.iml
+*.swap
+*.swp
+.*
+!.git*
+vendor/
+node_modules/
+.DS_Store
