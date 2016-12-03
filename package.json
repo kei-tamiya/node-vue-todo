@@ -2,7 +2,7 @@
   "name": "node-vue-todo",
   "version": "1.0.0",
   "description": "practice for node.js and vue.js and so on",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
