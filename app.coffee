@@ -30,6 +30,9 @@ app.engine 'html', require('pug').renderFile
 app.set 'view engine', 'pug'
 app.use logger('dev')
 
+Todo = mongoose.model('Todo')
+
+
 app.param 'id', (req, res, next, id) ->
   users = ["tanaka", "saitou", "yoshida"]
   req.params.name = users[id]
@@ -38,8 +41,13 @@ app.param 'id', (req, res, next, id) ->
 app.get '/', (req, res) ->
   res.send "hello world"
 
+app.get '/todos/index', (req, res) ->
+  Todo.find (err, todos) ->
+    console.log todos
+    res.render "todos/index", {todos: todos}
+
 app.get '/todos/new', (req, res) ->
-  res.render "todos/new"
+    res.render "todos/new"
 
 #app.configuration ->
 #  app.set 'storage-uri',
