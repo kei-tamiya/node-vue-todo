@@ -8,6 +8,7 @@ port = 8080
 bodyParser = require('body-parser')
 
 task_controllers = require('./app/controllers/task_controllers.js')
+api_task = require('./app/api/tasks/task.js')
 
 app.use bodyParser.json()
 app.use bodyParser.urlencoded({extended: true})
@@ -27,8 +28,15 @@ app.get '/', (req, res) ->
 
 app.get '/todos/index', task_controllers.index
 
+
 app.get '/todos/new', (req, res) ->
     res.render "todos/new"
+
+
+# db server api
+app.get '/api/todos/get', api_task.get
+
+
 
 #app.configuration ->
 #  app.set 'storage-uri',
