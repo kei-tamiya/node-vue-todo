@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/kei-tamiya/node-vue-todo#readme",
   "devDependencies": {
+    "mongoose": "^4.7.1",
     "morgan": "^1.7.0",
     "nodemon": "^1.11.0"
   }
