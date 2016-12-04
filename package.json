@@ -15,7 +15,7 @@
     "vue.js"
   ],
   "author": "kei-tamiya",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/kei-tamiya/node-vue-todo/issues"
   },
@@ -23,7 +23,8 @@
   "devDependencies": {
     "mongoose": "^4.7.1",
     "morgan": "^1.7.0",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "webpack": "^1.13.3"
   },
   "dependencies": {
     "vue": "^2.1.4"

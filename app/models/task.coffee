@@ -1,26 +1,12 @@
 mongoose = require('mongoose')
 Schema = mongoose.Schema
 
-todoSchema = new Schema({
-  title: string,
-  completed: boolean
+Task = new Schema({
+  title: String,
+  completed: Boolean
 })
 
-mongoose.model('Todo', todoSchema)
-
 # TODO 後でenvによって切り替えられるように書き換え
-mongoose.connect('mondodb://localhost:8080/todo_mongo')
+mongoose.connect('mongodb://172.17.0.2:27017/tasks')
 
-
-Todo = mongoose.model('Todo')
-todo = new Todo()
-todo.title = "test"
-todo.completed = false
-todo.save err ->
-  if err then console.log err
-
-#Todo.find({}, (err, docs) -> {
-#  for key, doc of docs console.log "title: #{doc.title}"
-#
-#
-#})
+module.exports = mongoose.model('Task', Task)
