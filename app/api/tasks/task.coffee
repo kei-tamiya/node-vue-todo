@@ -11,5 +11,5 @@ exports.post = (req, res) ->
     completed: false
   })
   t.save (err, resource) ->
-    res.send(500, { error: err }) if err?
-    res.send(resource)
+    res.status(500).send({ error: err }) if err?
+    res.status(200).send(resource)

@@ -2,17 +2,15 @@
 
 vm = new Vue
   el: "#wrapTodosTest",
-  created: ->
+  mounted: ->
     this.$http.get('/api/todos/get')
       .then (response) ->
-        this.todos = response.json().data
+        this.todos = response.body.data
       ,(response) ->
         console.log response
   data: {
     newTask: "",
-    todos: [
-      {title: "test"}
-    ]
+    todos: undefined
   },
 
   methods: {
@@ -21,7 +19,11 @@ vm = new Vue
         title: this.newTask,
         completed: false
       }
-      console.log "ttttt : #{t}"
+      this.$http.get('/api/todos/post', t)
+        .then (response) ->
+          this.todos = response.json().data
+        ,(response) ->
+          console.log response
       this.newTask = ""
 #      t.save (err, resource) ->
 #        res.send(500, { error: err }) if err?
