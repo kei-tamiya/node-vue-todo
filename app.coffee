@@ -39,7 +39,7 @@ app.get '/', (req, res) ->
   res.send "hello world"
 
 app.get '/todos/new', (req, res) ->
-  res.render "new"
+  res.render "todos/new"
 
 #app.configuration ->
 #  app.set 'storage-uri',
