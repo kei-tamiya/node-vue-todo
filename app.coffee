@@ -35,6 +35,7 @@ app.get '/todos/new', (req, res) ->
 
 # db server api
 app.get '/api/todos/get', api_task.get
+app.post '/api/todos/post', api_task.post
 
 
 

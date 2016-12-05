@@ -9,17 +9,18 @@ html(lang="ja")
         div.container
             div.row
                 div.col-sm-6.col-sm-offset-3
-                    div.newTodoForm
+                    div.newTodoForm#wrapTodosTest
                         div.form-group
-                            input(type="text" v-model="newTask" placeholder="new task ..." v-on="keyup:add | key enter").form-control
+                            input(type="text" v-model="newTask" v-on:keyup.enter="add" placeholder="new task ...").form-control
+                        div.form-group
+                            div(v-for="value in todos")
+                                h2 {{value.title}}
                     //div#wrapTodos
-                    //    if todos
+                    //    if todosz
                     //        each todo in todos
                     //            section
                     //                h2 #{todo.title}
-                    div#wrapTodosTest
-                        div(v-for="value in todos")
-                            h2 {{value.title}}
+
 
         script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.4/vue.min.js")
         script(src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js")
