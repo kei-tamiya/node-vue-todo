@@ -7,6 +7,6 @@ Task = new Schema({
 })
 
 # TODO 後でenvによって切り替えられるように書き換え
-mongoose.connect('mongodb://172.17.0.2:27017/tasks')
+mongoose.connect(process.env.MONGODB_URI)
 
 module.exports = mongoose.model('Task', Task)

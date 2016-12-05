@@ -28,6 +28,7 @@
     "webpack": "^1.13.3"
   },
   "dependencies": {
+    "dotenv": "^2.0.0",
     "vue": "^2.1.4"
   }
 }
