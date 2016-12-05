@@ -10,7 +10,7 @@ vm = new Vue
         console.log response
   data: {
     newTask: "",
-    todos: undefined
+    todos: []
   },
   methods: {
     add: ->
@@ -22,7 +22,7 @@ vm = new Vue
       }
       this.$http.post('/api/todos/post', t)
         .then (response) ->
-          this.todos = response.body.data
+          this.todos.push(response.body)
         ,(response) ->
           console.log response
       this.newTask = ""

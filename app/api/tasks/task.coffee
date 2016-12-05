@@ -6,7 +6,6 @@ exports.get = (req, res) ->
     res.status(200).send({ data: todos })
 
 exports.post = (req, res) ->
-  console.log "reqqqq: #{req.body}"
   t = new Task({
     title: req.body.title,
     completed: false
