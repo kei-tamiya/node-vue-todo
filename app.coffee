@@ -1,13 +1,11 @@
 express = require('express')
 app = express()
 http = require('http').Server(app)
-#router = express.Router()
 logger = require('morgan')
 path = require('path')
 port = 8080
 bodyParser = require('body-parser')
 
-# import .env
 require('dotenv').config()
 
 task_controllers = require('./app/controllers/task_controllers.js')
@@ -31,12 +29,9 @@ app.get '/', (req, res) ->
 
 app.get '/tasks/index', task_controllers.index
 
-
 app.get '/tasks/new', (req, res) ->
     res.render "tasks/new"
 
-
-# db server api
 app.get '/api/tasks/get', api_task.get
 app.post '/api/tasks/post', api_task.post
 app.patch '/api/tasks/update', api_task.update
