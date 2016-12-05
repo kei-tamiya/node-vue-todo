@@ -6,10 +6,8 @@ path = require('path')
 port = 8080
 bodyParser = require('body-parser')
 
-require('dotenv').config()
-
-task_controllers = require('./app/controllers/task_controllers.js')
-api_task = require('./app/api/tasks/task.js')
+task_controllers = require('./app/controllers/task_controllers.coffee')
+api_task = require('./app/api/tasks/task.coffee')
 
 app.use bodyParser.json()
 app.use bodyParser.urlencoded({extended: true})

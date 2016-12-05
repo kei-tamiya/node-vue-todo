@@ -1,5 +1,3 @@
-#Task = require('../../models/task.js')
-
 vm = new Vue
   el: "#wrapTodosTest",
   mounted: ->

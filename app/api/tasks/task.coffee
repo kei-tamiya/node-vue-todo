@@ -1,4 +1,4 @@
-Task = require('../../models/task.js')
+Task = require('../../models/task.coffee')
 
 exports.get = (req, res) ->
   Task.find (err, tasks) ->
