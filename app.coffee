@@ -45,5 +45,5 @@ app.post '/tasks/create', task_controllers.create
 app.get '/users/:id', (req, res) ->
   res.send "hello #{req.params.name} !"
 
-http.listen port, ->
+http.listen process.env.PORT || port, ->
   console.log "listening on *:", port
