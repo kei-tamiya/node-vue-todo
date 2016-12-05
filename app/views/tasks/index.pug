@@ -13,8 +13,9 @@ html(lang="ja")
                         div.form-group
                             input(type="text" v-model="newTask" v-on:keyup.enter="add" placeholder="new task ...").form-control
                         div.form-group
-                            div(v-for="value in tasks")
-                                h2 {{value.title}}
+                            div(v-for="(task, index) in tasks")
+                                input(type="checkbox" v-on:click="toggleComplete(index)" v-model="task.completed")
+                                h2 {{task.title}}
                     //div#wrapTodos
                     //    if tasksz
                     //        each task in tasks

@@ -26,4 +26,15 @@ vm = new Vue
         ,(response) ->
           console.log response
       this.newTask = ""
+
+    toggleComplete: (index) ->
+      b = !this.tasks[index].completed
+      t = Object.assign({}, this.tasks[index], {
+        completed: b
+      })
+      this.$http.patch('/api/tasks/update', t)
+        .then (response) ->
+          this.tasks[index].completed = b
+        , (response) ->
+          console.log response
   }
