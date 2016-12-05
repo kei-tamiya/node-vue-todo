@@ -7,21 +7,8 @@ path = require('path')
 port = 8080
 bodyParser = require('body-parser')
 
-#
-mongoose = require('mongoose')
-Schema = mongoose.Schema
-
-todoSchema = new Schema({
-  title: String,
-  completed: Boolean
-})
-
-mongoose.model('Todo', todoSchema)
-
-# TODO 後でenvによって切り替えられるように書き換え
-mongoose.connect('mongodb://172.17.0.2:27017/todos')
-
-#
+task_controllers = require('./app/controllers/task_controllers.js')
+api_task = require('./app/api/tasks/task.js')
 
 app.use bodyParser.json()
 app.use bodyParser.urlencoded({extended: true})
@@ -29,6 +16,7 @@ app.set 'views', path.join(__dirname, '/app/views')
 app.engine 'html', require('pug').renderFile
 app.set 'view engine', 'pug'
 app.use logger('dev')
+app.use express.static(path.join(__dirname, '/public'))
 
 app.param 'id', (req, res, next, id) ->
   users = ["tanaka", "saitou", "yoshida"]
@@ -38,8 +26,18 @@ app.param 'id', (req, res, next, id) ->
 app.get '/', (req, res) ->
   res.send "hello world"
 
+app.get '/todos/index', task_controllers.index
+
+
 app.get '/todos/new', (req, res) ->
-  res.render "new"
+    res.render "todos/new"
+
+
+# db server api
+app.get '/api/todos/get', api_task.get
+app.post '/api/todos/post', api_task.post
+
+
 
 #app.configuration ->
 #  app.set 'storage-uri',
@@ -50,15 +48,8 @@ app.get '/todos/new', (req, res) ->
 #  console.log "Mongoose - connection OK"
 
 
-app.post '/todos/create', (req, res) ->
-  Todo = mongoose.model('Todo')
-  t = new Todo({
-    title: req.body.title,
-    completed: false
-  })
-  t.save (err, resource) ->
-    res.send(500, { error: err }) if err?
-    res.send(resource)
+app.post '/todos/create', task_controllers.create
+
 #  fields = req.body
 #
 #  t = new Todo(fields)
@@ -69,10 +60,6 @@ app.post '/todos/create', (req, res) ->
 
 app.get '/users/:id', (req, res) ->
   res.send "hello #{req.params.name} !"
-
-
-
-
 
 #Todo.find({}, (err, docs) -> {
 #  for key, doc of docs console.log "title: #{doc.title}"
