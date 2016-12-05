@@ -3,7 +3,7 @@ html(lang="ja")
     head
         meta(charset="utf-8")
         style(src="/css/task.css")
-        title Node-Vue-Todo | todos
+        title Node-Vue-Todo | tasks
     body
         h1 Node-Vue-Todo | Todos#index
         div.container
@@ -13,13 +13,13 @@ html(lang="ja")
                         div.form-group
                             input(type="text" v-model="newTask" v-on:keyup.enter="add" placeholder="new task ...").form-control
                         div.form-group
-                            div(v-for="value in todos")
+                            div(v-for="value in tasks")
                                 h2 {{value.title}}
                     //div#wrapTodos
-                    //    if todosz
-                    //        each todo in todos
+                    //    if tasksz
+                    //        each task in tasks
                     //            section
-                    //                h2 #{todo.title}
+                    //                h2 #{task.title}
 
 
         script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.4/vue.min.js")

@@ -26,46 +26,20 @@ app.param 'id', (req, res, next, id) ->
 app.get '/', (req, res) ->
   res.send "hello world"
 
-app.get '/todos/index', task_controllers.index
+app.get '/tasks/index', task_controllers.index
 
 
-app.get '/todos/new', (req, res) ->
-    res.render "todos/new"
+app.get '/tasks/new', (req, res) ->
+    res.render "tasks/new"
 
 
 # db server api
-app.get '/api/todos/get', api_task.get
-app.post '/api/todos/post', api_task.post
+app.get '/api/tasks/get', api_task.get
+app.post '/api/tasks/post', api_task.post
 
-
-
-#app.configuration ->
-#  app.set 'storage-uri',
-#    'mongodb://172.17.0.2:27017/todos'
-#
-#mongoose.connect app.get('storage-uri'), { db: { safe: true }}, (err) ->
-#  console.log "Mongoose - connection error: " + err if err?
-#  console.log "Mongoose - connection OK"
-
-
-app.post '/todos/create', task_controllers.create
-
-#  fields = req.body
-#
-#  t = new Todo(fields)
-#  t.save (err, resource) ->
-#    res.send(500, { error: err }) if err?
-#    res.send(resource)
-#  res.send "#{req.body.title} Created!"
-
+app.post '/tasks/create', task_controllers.create
 app.get '/users/:id', (req, res) ->
   res.send "hello #{req.params.name} !"
-
-#Todo.find({}, (err, docs) -> {
-#  for key, doc of docs console.log "title: #{doc.title}"
-#
-#
-#})
 
 http.listen port, ->
   console.log "listening on *:", port
