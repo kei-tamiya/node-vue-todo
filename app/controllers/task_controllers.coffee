@@ -1,8 +1,8 @@
 Task = require('../models/task.js')
 
 exports.index = (req, res) ->
-  Task.find (err, todos) ->
-    res.render "todos/index", {todos: todos} if todos?
+  Task.find (err, tasks) ->
+    res.render "tasks/index", {tasks: tasks} if tasks?
 
 exports.create = (req, res) ->
   t = new Task({

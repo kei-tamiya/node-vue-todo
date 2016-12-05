@@ -3,14 +3,14 @@
 vm = new Vue
   el: "#wrapTodosTest",
   mounted: ->
-    this.$http.get('/api/todos/get')
+    this.$http.get('/api/tasks/get')
       .then (response) ->
-        this.todos = response.body.data
+        this.tasks = response.body.data
       ,(response) ->
         console.log response
   data: {
     newTask: "",
-    todos: []
+    tasks: []
   },
   methods: {
     add: ->
@@ -20,9 +20,9 @@ vm = new Vue
         title: nt,
         completed: false
       }
-      this.$http.post('/api/todos/post', t)
+      this.$http.post('/api/tasks/post', t)
         .then (response) ->
-          this.todos.push(response.body)
+          this.tasks.push(response.body)
         ,(response) ->
           console.log response
       this.newTask = ""
