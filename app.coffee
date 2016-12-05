@@ -7,6 +7,9 @@ path = require('path')
 port = 8080
 bodyParser = require('body-parser')
 
+# import .env
+require('dotenv').config()
+
 task_controllers = require('./app/controllers/task_controllers.js')
 api_task = require('./app/api/tasks/task.js')
 
