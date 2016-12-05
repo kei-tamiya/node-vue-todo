@@ -2,7 +2,7 @@ doctype html
 html(lang="ja")
     head
         meta(charset="utf-8")
-        style(src="/css/task.css")
+        link(rel="stylesheet" type="text/css" href="/css/task.css")
         title Node-Vue-Todo | tasks
     body
         h1 Node-Vue-Todo | Todos#index
@@ -10,17 +10,15 @@ html(lang="ja")
             div.row
                 div.col-sm-6.col-sm-offset-3
                     div.newTodoForm#wrapTodosTest
-                        div.form-group
-                            input(type="text" v-model="newTask" v-on:keyup.enter="add" placeholder="new task ...").form-control
-                        div.form-group
-                            div(v-for="value in tasks")
-                                h2 {{value.title}}
-                    //div#wrapTodos
-                    //    if tasksz
-                    //        each task in tasks
-                    //            section
-                    //                h2 #{task.title}
-
+                        form.form(v-on:submit.prevent="add")
+                            div.form-group
+                                input(type="text" v-model="newTask"  placeholder="new task ...").form-control
+                            div.form-group
+                                div(v-for="(task, index) in tasks")
+                                    h2(v-bind:class="{completed: task.completed}")
+                                        span
+                                            input(type="checkbox" v-on:click="toggleComplete(index)" v-model="task.completed")
+                                        | {{task.title}}
 
         script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.4/vue.min.js")
         script(src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js")
