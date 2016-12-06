@@ -1,0 +1,27 @@
+doctype html
+html(lang="ja")
+    head
+        meta(charset="utf-8")
+        link(rel="stylesheet" type="text/css" href="/css/room.css")
+        title Node-Vue-Todo | Home
+    body
+        h1 Node-Vue-Todo | Rooms#index
+        div.container
+            div.row
+                div.col-sm-6.col-sm-offset-3
+                    div.newTodoForm#wrapTodos
+                        form.form(v-on:submit.prevent="addRoom")
+                            div.form-group
+                                input(type="text" v-model="newRoom"  placeholder="new room ...").form-control
+                            div.form-group
+                                div(v-for="room in rooms")
+                                    h2
+                                        | {{room.name}}
+                                        span
+                                            input.btn(type="button" v-on:click="deleteRoom($index)" value="x")
+
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.4/vue.min.js")
+        script(src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js")
+        script(src="/js/bundle.js")
+
+
