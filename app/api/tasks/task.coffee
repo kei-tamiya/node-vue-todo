@@ -21,6 +21,6 @@ exports.update = (req, res) ->
     res.status(200).send(resource)
 
 exports.delete = (req, res) ->
-  Task.remove { _id: t._id }, (err, resource) ->
+  Task.remove { _id: req.body._id }, (err, resource) ->
     res.status(500).send({ error: err }) if err?
     res.status(200).send(resource)
