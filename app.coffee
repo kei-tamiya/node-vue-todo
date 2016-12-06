@@ -33,6 +33,7 @@ app.get '/tasks/new', (req, res) ->
 app.get '/api/tasks/get', api_task.get
 app.post '/api/tasks/post', api_task.post
 app.patch '/api/tasks/update', api_task.update
+app.delete '/api/tasks/delete', api_task.delete
 
 app.post '/tasks/create', task_controllers.create
 app.get '/users/:id', (req, res) ->

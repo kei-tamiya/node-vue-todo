@@ -19,3 +19,8 @@ exports.update = (req, res) ->
   Task.update { _id: t._id }, { $set: { title: t.title, completed: t.completed } }, (err, resource) ->
     res.status(500).send({ error: err }) if err?
     res.status(200).send(resource)
+
+exports.delete = (req, res) ->
+  Task.remove { _id: t._id }, (err, resource) ->
+    res.status(500).send({ error: err }) if err?
+    res.status(200).send(resource)
