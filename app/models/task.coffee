@@ -6,7 +6,4 @@ Task = new Schema({
   completed: Boolean
 })
 
-# TODO 後でenvによって切り替えられるように書き換え
-mongoose.connect(process.env.MONGODB_URI)
-
 module.exports = mongoose.model('Task', Task)
