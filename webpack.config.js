@@ -1,6 +1,6 @@
 module.exports = {
   entry: {
-    'public/js/bundle': './app/assets/js/task.js'
+    'public/js/bundle': './app/assets/js/*.js'
   },
   output: {
     path: './',

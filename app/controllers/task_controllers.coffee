@@ -2,7 +2,7 @@ Task = require('../models/task.coffee')
 
 exports.index = (req, res) ->
   Task.find (err, tasks) ->
-    res.render "tasks/index", {tasks: tasks} if tasks?
+    res.render "tasks/index", { tasks: tasks } if tasks?
 
 exports.create = (req, res) ->
   t = new Task({
