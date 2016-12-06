@@ -4,6 +4,14 @@ html(lang="ja")
         meta(charset="utf-8")
         link(rel="stylesheet" type="text/css" href="/css/room.css")
         title Node-Vue-Todo | Home
+        script(
+        src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous")
+            link(rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+            crossorigin="anonymous")
     body
         h1 Node-Vue-Todo | Rooms#index
         div.container
@@ -14,14 +22,17 @@ html(lang="ja")
                             div.form-group
                                 input(type="text" v-model="newRoom"  placeholder="new room ...").form-control
                             div.form-group
-                                div(v-for="room in rooms")
+                                div.rooms(v-for="room in rooms")
+                                    p.hiddenRoomId(hidden)
+                                        | {{room._id}}
                                     h2
-                                        | {{room.name}}
+                                        a.roomIdLinkTarget
+                                            | {{room.name}}
                                         span
-                                            input.btn(type="button" v-on:click="deleteRoom($index)" value="x")
+                                            input.btn(type="button" value="x")
 
         script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.4/vue.min.js")
         script(src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js")
-        script(src="/js/bundle.js")
+        script(src="/js/room.js")
 
 

@@ -12,13 +12,12 @@ vm = new Vue
   },
   methods: {
     addRoom: ->
-      nt = this.newRoom.trim()
-      if (!nt) then return
-      t = {
-        title: nt,
-        completed: false
+      nr = this.newRoom.trim()
+      if (!nr) then return
+      r = {
+        name: nr
       }
-      this.$http.post('/api/rooms/post', t)
+      this.$http.post('/api/rooms/post', r)
         .then (response) ->
           this.rooms.push(response.body)
         ,(response) ->
@@ -26,11 +25,18 @@ vm = new Vue
       this.newRoom = ""
 
     deleteRoom: (index) ->
-      t = Object.assign {}, this.rooms[index]
-      if (confirm("「#{t.title}」　を削除してよろしいですか？"))
-        this.$http.delete('/api/rooms/delete', t)
+      r = Object.assign {}, this.rooms[index]
+      if (confirm("「#{r.name}」　を削除してよろしいですか？"))
+        this.$http.delete("/api/rooms/delete/#{r._id}")
           .then ->
             this.rooms.splice(index, 1)
           , (response) ->
             console.log response
   }
+
+$ ->
+  setTimeout( ->
+    console.log $('.hiddenRoomId').siblings('h2').find('a.roomIdLinkTarget').attr('href', "rooms/" + $('.rooms').children('.hiddenRoomId').text())
+  , 1000)
+  setRoomLink = ->
+    $('.hiddenRoomId').siblings('h2').find('a.roomIdLinkTarget').attr('hred', $('.hiddenRoomId').text())

@@ -45,3 +45,4 @@ vm = new Vue
           , (response) ->
             console.log response
   }
+
