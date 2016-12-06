@@ -1,5 +1,5 @@
 vm = new Vue
-  el: "#wrapTodosTest",
+  el: "#wrapTodos",
   mounted: ->
     this.$http.get('/api/tasks/get')
       .then (response) ->
@@ -31,8 +31,17 @@ vm = new Vue
         completed: b
       })
       this.$http.patch('/api/tasks/update', t)
-        .then (response) ->
+        .then ->
           this.tasks[index].completed = b
         , (response) ->
           console.log response
+
+    deleteTask: (index) ->
+      t = Object.assign {}, this.tasks[index]
+      if (confirm("「#{t.title}」　を削除してよろしいですか？"))
+        this.$http.delete('/api/tasks/delete', t)
+          .then ->
+            this.tasks.splice(index, 1)
+          , (response) ->
+            console.log response
   }

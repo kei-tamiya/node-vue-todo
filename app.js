@@ -16,11 +16,9 @@
 
   bodyParser = require('body-parser');
 
-  require('dotenv').config();
+  task_controllers = require('./app/controllers/task_controllers.coffee');
 
-  task_controllers = require('./app/controllers/task_controllers.js');
-
-  api_task = require('./app/api/tasks/task.js');
+  api_task = require('./app/api/tasks/task.coffee');
 
   app.use(bodyParser.json());
 
@@ -61,6 +59,8 @@
 
   app.patch('/api/tasks/update', api_task.update);
 
+  app["delete"]('/api/tasks/delete', api_task["delete"]);
+
   app.post('/tasks/create', task_controllers.create);
 
   app.get('/users/:id', function(req, res) {
@@ -72,3 +72,5 @@
   });
 
 }).call(this);
+
+//# sourceMappingURL=app.js.map
