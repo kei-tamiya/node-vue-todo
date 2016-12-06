@@ -49,7 +49,7 @@
 	  var vm;
 
 	  vm = new Vue({
-	    el: "#wrapTodosTest",
+	    el: "#wrapTodos",
 	    mounted: function() {
 	      return this.$http.get('/api/tasks/get').then(function(response) {
 	        return this.tasks = response.body.data;
@@ -85,11 +85,22 @@
 	        t = Object.assign({}, this.tasks[index], {
 	          completed: b
 	        });
-	        return this.$http.patch('/api/tasks/update', t).then(function(response) {
+	        return this.$http.patch('/api/tasks/update', t).then(function() {
 	          return this.tasks[index].completed = b;
 	        }, function(response) {
 	          return console.log(response);
 	        });
+	      },
+	      deleteTask: function(index) {
+	        var t;
+	        t = Object.assign({}, this.tasks[index]);
+	        if (confirm("「" + t.title + "」　を削除してよろしいですか？")) {
+	          return this.$http["delete"]('/api/tasks/delete', t).then(function() {
+	            return this.tasks.splice(index, 1);
+	          }, function(response) {
+	            return console.log(response);
+	          });
+	        }
 	      }
 	    }
 	  });

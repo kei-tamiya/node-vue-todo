@@ -9,7 +9,7 @@ html(lang="ja")
         div.container
             div.row
                 div.col-sm-6.col-sm-offset-3
-                    div.newTodoForm#wrapTodosTest
+                    div.newTodoForm#wrapTodos
                         form.form(v-on:submit.prevent="add")
                             div.form-group
                                 input(type="text" v-model="newTask"  placeholder="new task ...").form-control
@@ -19,6 +19,8 @@ html(lang="ja")
                                         span
                                             input(type="checkbox" v-on:click="toggleComplete(index)" v-model="task.completed")
                                         | {{task.title}}
+                                        span
+                                            input.btn(type="button" v-on:click="deleteTask(index)" value="x")
 
         script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.4/vue.min.js")
         script(src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js")
