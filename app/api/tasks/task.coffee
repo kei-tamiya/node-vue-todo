@@ -1,7 +1,7 @@
 Task = require('../../models/task.coffee')
 
 exports.get = (req, res) ->
-  Task.find (err, tasks) ->
+  Task.find { room_id: req.params.room_id }, (err, tasks) ->
     res.status(500).send({ error: err }) if err?
     res.status(200).send({ data: tasks })
 

@@ -6,5 +6,6 @@ exports.index = (req, res) ->
     res.render 'rooms/index', { rooms: rooms } if rooms?
 
 exports.show = (req, res) ->
-  Task.find (err, tasks) ->
+  Task.find { title: 'aaa' }, (err, tasks) ->
+    console.log "tasks : #{tasks} "
     res.render "rooms/show", { tasks: tasks, room_id: req.params.id } if tasks?
