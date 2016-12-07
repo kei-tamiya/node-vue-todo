@@ -10,6 +10,6 @@ router.delete '/tasks/delete', api_task.delete
 
 router.get '/rooms/get', api_room.get
 router.post '/rooms/post', api_room.post
-router.delete '/rooms/delete/:id', api_room.delete
+router.delete '/rooms/delete', api_room.delete
 
 module.exports = router;

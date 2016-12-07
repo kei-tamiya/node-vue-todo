@@ -14,6 +14,6 @@ exports.post = (req, res) ->
     res.status(200).send(resource)
 
 exports.delete = (req, res) ->
-  Room.remove { _id: req.params.id }, (err, resource) ->
+  Room.remove { _id: req.body._id }, (err, resource) ->
     res.status(500).send({ error: err }) if err?
     res.status(200).send(resource)

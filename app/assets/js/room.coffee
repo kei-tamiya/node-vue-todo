@@ -1,4 +1,4 @@
-vm = new Vue
+rvm = new Vue
   el: "#wrapRooms",
   mounted: ->
     this.$http.get('/api/rooms/get')
@@ -27,7 +27,7 @@ vm = new Vue
     deleteRoom: (index) ->
       r = Object.assign {}, this.rooms[index]
       if (confirm("「#{r.name}」　を削除してよろしいですか？"))
-        this.$http.delete("/api/rooms/delete/#{r._id}")
+        this.$http.delete("/api/rooms/delete", { body: r })
           .then ->
             this.rooms.splice(index, 1)
           , (response) ->
@@ -36,7 +36,7 @@ vm = new Vue
 
 $ ->
   setTimeout( ->
-    console.log $('.hiddenRoomId').siblings('h2').find('a.roomIdLinkTarget').attr('href', "rooms/" + $('.rooms').children('.hiddenRoomId').text())
+    $('.hiddenRoomId').siblings('h2').find('a.roomIdLinkTarget').attr('href', "rooms/" + $('.rooms').children('.hiddenRoomId').text())
   , 1000)
   setRoomLink = ->
     $('.hiddenRoomId').siblings('h2').find('a.roomIdLinkTarget').attr('hred', $('.hiddenRoomId').text())
