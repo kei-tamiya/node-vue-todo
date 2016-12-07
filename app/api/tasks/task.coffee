@@ -6,8 +6,10 @@ exports.get = (req, res) ->
     res.status(200).send({ data: tasks })
 
 exports.post = (req, res) ->
+  b = req.body
   t = new Task({
-    title: req.body.title,
+    room_id: b.room_id,
+    title: b.title,
     completed: false
   })
   t.save (err, resource) ->

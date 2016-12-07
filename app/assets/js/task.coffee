@@ -1,4 +1,4 @@
-vm = new Vue
+tvm = new Vue
   el: "#wrapTodos",
   mounted: ->
     this.$http.get('/api/tasks/get')
@@ -11,7 +11,7 @@ vm = new Vue
     tasks: []
   },
   methods: {
-    add: ->
+    addTask: ->
       nt = this.newTask.trim()
       if (!nt) then return
       t = {
@@ -30,7 +30,7 @@ vm = new Vue
       t = Object.assign({}, this.tasks[index], {
         completed: b
       })
-      this.$http.patch('/api/tasks/update', t)
+      this.$http.patch("/api/tasks/update", { body: t })
         .then ->
           this.tasks[index].completed = b
         , (response) ->
@@ -38,10 +38,12 @@ vm = new Vue
 
     deleteTask: (index) ->
       t = Object.assign {}, this.tasks[index]
+      console.log "req:t  #{JSON.stringify t}"
       if (confirm("「#{t.title}」　を削除してよろしいですか？"))
-        this.$http.delete('/api/tasks/delete', t)
+        this.$http.delete("/api/tasks/delete", { body: t })
           .then ->
             this.tasks.splice(index, 1)
           , (response) ->
             console.log response
   }
+

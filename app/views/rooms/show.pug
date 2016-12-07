@@ -3,14 +3,14 @@ html(lang="ja")
     head
         meta(charset="utf-8")
         link(rel="stylesheet" type="text/css" href="/css/task.css")
-        title Node-Vue-Todo | tasks
+        title Node-Vue-Todo | Home
     body
-        h1 Node-Vue-Todo | Todos#index
+        h1 Node-Vue-Todo | Rooms#show
         div.container
             div.row
                 div.col-sm-6.col-sm-offset-3
                     div.newTodoForm#wrapTodos
-                        form.form(v-on:submit.prevent="add")
+                        form.form(v-on:submit.prevent="addTask")
                             div.form-group
                                 input(type="text" v-model="newTask"  placeholder="new task ...").form-control
                             div.form-group
@@ -25,5 +25,3 @@ html(lang="ja")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.4/vue.min.js")
         script(src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js")
         script(src="/js/task.js")
-
-
