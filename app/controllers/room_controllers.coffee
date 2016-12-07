@@ -1,8 +1,10 @@
 Room = require('../models/room.coffee')
+Task = require('../models/task.coffee')
 
 exports.index = (req, res) ->
   Room.find (err, rooms) ->
-    res.render 'rooms/index', { rooms: rooms, test : "testteste" } if rooms?
+    res.render 'rooms/index', { rooms: rooms } if rooms?
 
 exports.show = (req, res) ->
-  res.render 'rooms/show', { room_id: req.params.id }
+  Task.find (err, tasks) ->
+    res.render "rooms/show", { tasks: tasks, room_id: req.params.id } if tasks?
