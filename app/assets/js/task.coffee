@@ -1,3 +1,21 @@
+socket = io();
+
+Vue.component('task-item', {
+  template: '\
+    <div>\
+      <h2 v-bind:class="{completed: task.completed}">\
+        <span>\
+            <input type="checkbox" v-on:click="$emit(\'toggle-complete\')" v-model="task.completed" />\
+            {{ task.title }}\
+        </span>\
+        <span>\
+            <input class="btn" type="button" v-on:click="$emit(\'delete-task\')" value="x" />\
+        </span>\
+    </div>\
+  ',
+  props: ['task']
+})
+
 tvm = new Vue
   el: "#wrapTodos",
   mounted: ->
@@ -20,7 +38,7 @@ tvm = new Vue
       }
       this.$http.post('/api/tasks/post', t)
         .then (response) ->
-          this.tasks.push(response.body)
+          socket.emit 'addTask', response.body
         ,(response) ->
           console.log response
       this.newTask = ""
@@ -32,28 +50,37 @@ tvm = new Vue
       })
       this.$http.patch("/api/tasks/update", { body: t })
         .then ->
-          this.tasks[index].completed = b
+          socket.emit 'toggleComplete', { index: index, completed: b }
         , (response) ->
           console.log response
 
     updateTitle: (index) ->
       t = Object.assign({}, this.tasks[index], {
       })
-      console.log "ttt #{JSON.stringify t}"
       this.$http.patch("/api/tasks/update", { body: t })
         .then ->
-          console.log "success"
+          socket.emit 'updateTitle', { index: index, title: t.title }
         , (response) ->
           console.log response
 
     deleteTask: (index) ->
       t = Object.assign {}, this.tasks[index]
-      console.log "req:t  #{JSON.stringify t}"
       if (confirm("「#{t.title}」　を削除してよろしいですか？"))
         this.$http.delete("/api/tasks/delete", { body: t })
           .then ->
-            this.tasks.splice(index, 1)
+            socket.emit 'deleteTask', index
           , (response) ->
             console.log response
   }
 
+socket.on 'addTask', (task) ->
+  tvm.tasks.push(task)
+
+socket.on 'toggleComplete', (data) ->
+  tvm.tasks[data.index].completed = data.completed
+
+socket.on 'updateTitle', (data) ->
+  tvm.tasks[data.index].title = data.title
+
+socket.on 'deleteTask', (index) ->
+  tvm.tasks.splice(index, 1)
