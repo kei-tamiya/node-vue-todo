@@ -24,8 +24,17 @@ app.use express.static(path.join(__dirname, '/public'))
 app.use '/', router.room
 app.use '/api', router.api
 io.on 'connection', (socket) ->
-  socket.on 'chat message', (msg) ->
-    io.emit('chat message', msg)
+  socket.on 'addTask', (task) ->
+    io.emit 'addTask', task
+
+  socket.on 'toggleComplete', (data) ->
+    io.emit 'toggleComplete', data
+
+  socket.on 'updateTitle', (data) ->
+    io.emit 'updateTitle', data
+
+  socket.on 'deleteTask', (index) ->
+    io.emit 'deleteTask', index
 
 app.use errorHandler.logErrors
 app.use errorHandler.errorHandler
