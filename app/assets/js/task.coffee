@@ -4,11 +4,11 @@ Vue.component('task-item', {
   template: '\
     <div>\
       <h2 v-bind:class="{completed: task.completed}">\
-        <span>\
+        <span class="taskCompleteCheck">\
             <input type="checkbox" v-on:click="$emit(\'toggle-complete\')" v-model="task.completed" />\
-            {{ task.title }}\
         </span>\
-        <span>\
+        {{ task.title }}\
+        <span class="pull-right">\
             <input class="btn" type="button" v-on:click="$emit(\'delete-task\')" value="x" />\
         </span>\
     </div>\
