@@ -8,22 +8,23 @@ html(lang="ja")
         src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous")
-            link(rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-            crossorigin="anonymous")
+        link(rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous")
         script(src="https://cdn.socket.io/socket.io-1.2.0.js")
     body
-        h1 Node-Vue-Todo | Rooms#index
         div.container
             div.row
                 div.col-sm-6.col-sm-offset-3
+                    h1.text-center グループTo Doルーム
+                    p.text-center Todoを書く部屋を作ろう！
                     div.newTodoForm#wrapRooms
                         form.form(v-on:submit.prevent="addRoom")
                             div.form-group
                                 input(type="text" v-model="newRoom"  placeholder="new room ...").form-control
-                            div.form-group
-                                div.rooms(is="room-item" v-for="(room, index) in rooms" v-bind:room="room" v-on:delete-room="deleteRoom(index)")
+                            div.panel.panel-default
+                                div.rooms.well(is="room-item" v-for="(room, index) in rooms" v-bind:room="room" v-on:delete-room="deleteRoom(index)")
 
 
         script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.4/vue.min.js")

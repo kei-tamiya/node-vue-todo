@@ -8,23 +8,24 @@ html(lang="ja")
         src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous")
-            link(rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-            crossorigin="anonymous")
+        link(rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous")
         script(src="https://cdn.socket.io/socket.io-1.2.0.js")
     body
-        h1 Node-Vue-Todo | Rooms#show
         p#roomId(hidden) #{room_id}
         div.container
             div.row
                 div.col-sm-6.col-sm-offset-3
+                    h1.text-center Todoを追加しよう！
+                    p.text-center 誰かと共有で使えるよ！
                     div.newTodoForm#wrapTodos
                         form.form(v-on:submit.prevent="addTask")
                             div.form-group
                                 input(type="text" v-model="newTask"  placeholder="new task ...").form-control
-                            div.form-group
-                                div(is="task-item"  v-for="(task, index) in tasks" v-bind:task="task" v-on:toggle-complete="toggleComplete(index)" v-on:update-title="updateTitle(index)" v-on:delete-task="deleteTask(index)")
+                            div.panel.panel-default
+                                div.well(is="task-item"  v-for="(task, index) in tasks" v-bind:task="task" v-on:toggle-complete="toggleComplete(index)" v-on:update-title="updateTitle(index)" v-on:delete-task="deleteTask(index)")
 
 
         script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.4/vue.min.js")

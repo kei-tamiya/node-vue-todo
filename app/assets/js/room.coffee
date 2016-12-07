@@ -8,7 +8,7 @@ Vue.component('room-item', {
         <a class="roomIdLinkTarget">\
             {{ room.name }}\
         </a>\
-        <span>\
+        <span class="pull-right">\
             <input class="btn" type="button" v-on:click="$emit(\'delete-room\')" value="x" />\
         </span>\
     </div>\
