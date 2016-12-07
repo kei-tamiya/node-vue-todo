@@ -36,6 +36,16 @@ tvm = new Vue
         , (response) ->
           console.log response
 
+    updateTitle: (index) ->
+      t = Object.assign({}, this.tasks[index], {
+      })
+      console.log "ttt #{JSON.stringify t}"
+      this.$http.patch("/api/tasks/update", { body: t })
+        .then ->
+          console.log "success"
+        , (response) ->
+          console.log response
+
     deleteTask: (index) ->
       t = Object.assign {}, this.tasks[index]
       console.log "req:t  #{JSON.stringify t}"
