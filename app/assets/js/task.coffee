@@ -39,7 +39,6 @@ tvm = new Vue
     updateTitle: (index) ->
       t = Object.assign({}, this.tasks[index], {
       })
-      console.log "ttt #{JSON.stringify t}"
       this.$http.patch("/api/tasks/update", { body: t })
         .then ->
           console.log "success"
@@ -48,7 +47,6 @@ tvm = new Vue
 
     deleteTask: (index) ->
       t = Object.assign {}, this.tasks[index]
-      console.log "req:t  #{JSON.stringify t}"
       if (confirm("「#{t.title}」　を削除してよろしいですか？"))
         this.$http.delete("/api/tasks/delete", { body: t })
           .then ->
@@ -56,4 +54,14 @@ tvm = new Vue
           , (response) ->
             console.log response
   }
+
+$ ->
+  socket = io();
+  $('#testForm').submit ->
+    socket.emit 'chat message', $('#m').val()
+    $('#m').val('')
+    return false
+  socket.on 'chat message', (msg) ->
+    html = "<li>#{msg}</li>"
+    $('#messages').append(html)
 
