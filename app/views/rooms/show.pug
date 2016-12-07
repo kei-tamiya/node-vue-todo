@@ -18,7 +18,7 @@ html(lang="ja")
                                     h2(v-bind:class="{completed: task.completed}")
                                         span
                                             input(type="checkbox" v-on:click="toggleComplete(index)" v-model="task.completed")
-                                            input(type="text" v-on:blur="updateTitle(index)" v-model="task.title")
+                                            input(type="text" v-on:blur="updateTitle(index)" v-on:keyup.enter="updateTitle(index)" v-model="task.title")
                                         span
                                             input.btn(type="button" v-on:click="deleteTask(index)" value="x")
 
