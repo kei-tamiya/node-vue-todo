@@ -1,3 +1,21 @@
+socket = io();
+
+Vue.component('room-item', {
+  template: '\
+    <div>\
+      <p class="hiddenRoomId" hidden>{{  room._id }}</p>\
+      <h2>\
+        <a class="roomIdLinkTarget">\
+            {{ room.name }}\
+        </a>\
+        <span>\
+            <input class="btn" type="button" v-on:click="$emit(\'delete-room\')" value="x" />\
+        </span>\
+    </div>\
+  ',
+  props: ['room']
+})
+
 rvm = new Vue
   el: "#wrapRooms",
   mounted: ->
@@ -19,7 +37,7 @@ rvm = new Vue
       }
       this.$http.post('/api/rooms/post', r)
         .then (response) ->
-          this.rooms.push(response.body)
+          socket.emit 'addRoom', response.body
         ,(response) ->
           console.log response
       this.newRoom = ""
@@ -29,14 +47,21 @@ rvm = new Vue
       if (confirm("「#{r.name}」　を削除してよろしいですか？"))
         this.$http.delete("/api/rooms/delete", { body: r })
           .then ->
-            this.rooms.splice(index, 1)
+            socket.emit 'deleteRoom', index
           , (response) ->
             console.log response
   }
 
-$ ->
+addRoomLink = (speed) ->
   setTimeout( ->
     $('.hiddenRoomId').siblings('h2').find('a.roomIdLinkTarget').attr('href', "rooms/" + $('.rooms').children('.hiddenRoomId').text())
-  , 1000)
-  setRoomLink = ->
-    $('.hiddenRoomId').siblings('h2').find('a.roomIdLinkTarget').attr('hred', $('.hiddenRoomId').text())
+  , speed)
+
+addRoomLink(1000)
+
+socket.on 'addRoom', (room) ->
+  rvm.rooms.push(room)
+  addRoomLink(1000)
+
+socket.on 'deleteRoom', (index) ->
+  rvm.rooms.splice(index, 1)

@@ -36,6 +36,12 @@ io.on 'connection', (socket) ->
   socket.on 'deleteTask', (index) ->
     io.emit 'deleteTask', index
 
+  socket.on 'addRoom', (room) ->
+    io.emit 'addRoom', room
+
+  socket.on 'deleteRoom', (index) ->
+    io.emit 'deleteRoom', index
+
 app.use errorHandler.logErrors
 app.use errorHandler.errorHandler
 app.use errorHandler.notFoundErrorHandler
