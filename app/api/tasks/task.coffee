@@ -17,7 +17,7 @@ exports.post = (req, res) ->
     res.status(200).send(resource)
 
 exports.update = (req, res) ->
-  t = req.body
+  t = req.body.body
   Task.update { _id: t._id }, { $set: { title: t.title, completed: t.completed } }, (err, resource) ->
     res.status(500).send({ error: err }) if err?
     res.status(200).send(resource)
