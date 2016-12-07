@@ -54,7 +54,9 @@ rvm = new Vue
 
 addRoomLink = (speed) ->
   setTimeout( ->
-    $('.hiddenRoomId').siblings('h2').find('a.roomIdLinkTarget').attr('href', "rooms/" + $('.rooms').children('.hiddenRoomId').text())
+    $('.hiddenRoomId').each( ->
+      $(this).siblings('h2').find('a.roomIdLinkTarget').attr('href', "rooms/" + $(this).text())
+    )
   , speed)
 
 addRoomLink(1000)

@@ -15,6 +15,7 @@ html(lang="ja")
         script(src="https://cdn.socket.io/socket.io-1.2.0.js")
     body
         h1 Node-Vue-Todo | Rooms#show
+        p#roomId(hidden) #{room_id}
         div.container
             div.row
                 div.col-sm-6.col-sm-offset-3

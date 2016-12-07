@@ -19,7 +19,7 @@ Vue.component('task-item', {
 tvm = new Vue
   el: "#wrapTodos",
   mounted: ->
-    this.$http.get('/api/tasks/get')
+    this.$http.get("/api/rooms/#{$('#roomId').text()}/tasks/get")
       .then (response) ->
         this.tasks = response.body.data
       ,(response) ->
@@ -33,10 +33,11 @@ tvm = new Vue
       nt = this.newTask.trim()
       if (!nt) then return
       t = {
+        room_id: $('#roomId').text(),
         title: nt,
         completed: false
       }
-      this.$http.post('/api/tasks/post', t)
+      this.$http.post("/api/rooms/#{$('#roomId').text()}/tasks/post", t)
         .then (response) ->
           socket.emit 'addTask', response.body
         ,(response) ->
@@ -48,7 +49,7 @@ tvm = new Vue
       t = Object.assign({}, this.tasks[index], {
         completed: b
       })
-      this.$http.patch("/api/tasks/update", { body: t })
+      this.$http.patch("/api/rooms/#{$('#roomId').text()}/tasks/update", { body: t })
         .then ->
           socket.emit 'toggleComplete', { index: index, completed: b }
         , (response) ->
@@ -57,7 +58,7 @@ tvm = new Vue
     updateTitle: (index) ->
       t = Object.assign({}, this.tasks[index], {
       })
-      this.$http.patch("/api/tasks/update", { body: t })
+      this.$http.patch("/api/rooms/#{$('#roomId').text()}/tasks/update", { body: t })
         .then ->
           socket.emit 'updateTitle', { index: index, title: t.title }
         , (response) ->
@@ -66,7 +67,7 @@ tvm = new Vue
     deleteTask: (index) ->
       t = Object.assign {}, this.tasks[index]
       if (confirm("「#{t.title}」　を削除してよろしいですか？"))
-        this.$http.delete("/api/tasks/delete", { body: t })
+        this.$http.delete("/api/rooms/#{$('#roomId').text()}/tasks/delete", { body: t })
           .then ->
             socket.emit 'deleteTask', index
           , (response) ->
