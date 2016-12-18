@@ -23,6 +23,7 @@ app.use logger('dev')
 app.use express.static(path.join(__dirname, '/public'))
 app.use '/', router.room
 app.use '/api', router.api
+app.use '/hook', router.hook
 io.on 'connection', (socket) ->
   socket.on 'addTask', (task) ->
     io.emit 'addTask', task
