@@ -20,12 +20,20 @@ html(lang="ja")
                 div.col-sm-6.col-sm-offset-3
                     h1.text-center Todoを追加しよう！
                     p.text-center 誰かと共有で使えるよ！
+                    div#wrapGithubIssues
+                        div.panel.panel-default
+                            div.well(is="github-issue" v-for="(issue, index) in issues" v-bind:task="issue")
+
+                    div#wrapGithubIssueComments
+                        div.panel.panel-default
+                            div.well(is="github-issue-comment" v-for="(comment, index) in comments" v-bind:task="comment")
+
                     div.newTodoForm#wrapTodos
                         form.form(v-on:submit.prevent="addTask")
                             div.form-group
                                 input(type="text" v-model="newTask"  placeholder="new task ...").form-control
                             div.panel.panel-default
-                                div.well(is="task-item"  v-for="(task, index) in tasks" v-bind:task="task" v-on:toggle-complete="toggleComplete(index)" v-on:update-title="updateTitle(index)" v-on:delete-task="deleteTask(index)")
+                                div.well(is="task-item" v-for="(task, index) in tasks" v-bind:task="task" v-on:toggle-complete="toggleComplete(index)" v-on:update-title="updateTitle(index)" v-on:delete-task="deleteTask(index)")
 
 
         script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.4/vue.min.js")

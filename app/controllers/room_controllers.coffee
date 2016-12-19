@@ -7,4 +7,4 @@ exports.index = (req, res) ->
 
 exports.show = (req, res) ->
   Task.find {}, (err, tasks) ->
-    res.rend r "rooms/show", { tasks: tasks, room_id: req.params.id } if tasks?
+    res.render "rooms/show", { tasks: tasks, room_id: req.params.id } if tasks?

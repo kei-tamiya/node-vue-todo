@@ -24,9 +24,5 @@ GithubIssueComment = new Schema({
   created_at: String
 })
 
-Github = {
-  GithubIssue,
-  GithubIssueComment
-}
-
-module.exports = mongoose.model('Github', Github)
+module.exports = mongoose.model('GithubIssue', GithubIssue)
+module.exports = mongoose.model('GithubIssueComment', GithubIssueComment)

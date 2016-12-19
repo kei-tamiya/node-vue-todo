@@ -1,6 +1,5 @@
-Github = require('../../../webhook/github_issue/github_model.coffee')
-GithubIssue = Github.GithubIssue
-GithubIssueComment = Github.GithubIssueComment
+GithubIssue = require('../../../webhook/github_issue/github_model.coffee')
+GithubIssueComment = require('../../../webhook/github_issue/github_model.coffee')
 
 exports.GithubIssueGet = (req, res) ->
   GithubIssue.find { room_id: req.params.room_id }, (err, issues) ->
